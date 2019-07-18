@@ -6,7 +6,7 @@ WORKDIR /temp
 
 RUN apt-get update -y && apt-get install -yq tar
 
-RUN wget https://github.com/onesdk/url-to-pdf-api/archive/master.tar.gz
+RUN wget https://github.com/alvarcarto/url-to-pdf-api/archive/master.tar.gz
 RUN tar -zxf master.tar.gz
 
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
@@ -32,10 +32,10 @@ COPY --from=builder /temp/url-to-pdf-api-master /app
 ENV CHROMIUM_VERSION=$CHROMIUM_VERSION \
     NODE_VERSION=$NODE_VERSION \
     NODE_ENV=production \
-    PORT=80 \
+    PORT=9000 \
     ALLOW_HTTP=true \
-    PUPPETEER_CHROMIUM_PATH=/bin/chromium
+    PUPPETEER_EXECUTABLE_PATH=/bin/chromium
 
-EXPOSE 80
+EXPOSE 9000
 
 ENTRYPOINT ["/bin/node", "src/index.js"]
